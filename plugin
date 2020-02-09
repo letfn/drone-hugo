@@ -16,7 +16,7 @@ function main {
     fi
   ) > /drone/config.yaml
   
-  exec hugo --configDir /drone
+  exec hugo --config /drone/config.yaml
 }
 
 main "$@"
