@@ -18,8 +18,7 @@ lint: # Run drone lint
 
 test: # Run tests
 	@echo
-	cat .drone.yml.test.template | sed 's#$${PROJECT_PATH}#'"$(PWD)"'#' > .drone.yml.test
-	drone exec --pipeline $@ --trusted .drone.yml.test
+	drone exec --pipeline $@
 
 docs: # Build docs with hugo
 	@echo

@@ -3,9 +3,20 @@
 function main {
   set -exfu
 
-  env | egrep '^(PLUGIN|DRONE|CI)_' | sort
-
-  exec "$@"
+  (
+    cat /drone/config.yaml.template
+    echo
+    if [[ -f config.yaml ]]; then
+      cat config.yaml
+      echo
+    fi
+    if [[ -n "${PLUGIN_GITHUB_PAGES:-}" ]]; then
+      echo uglyurls: false
+      echo publishDir: gh-pages
+    fi
+  ) > /drone/config.yaml
+  
+  exec hugo --configDir /drone
 }
 
 main "$@"
