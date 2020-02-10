@@ -13,15 +13,14 @@ steps:
   settings:
     args: --single-snapshot
     cache: true
+    cache_repo: letfn/cache
     password:
       from_secret: docker_password
-    cache_repo: letfn/cache
     repo: letfn/drone-hugo
     skip_tls_verify: true
-    tags: latest
+    tag: latest
     username:
       from_secret: docker_username
-    tag: latest
 
 ---
 kind: pipeline
@@ -68,6 +67,7 @@ steps:
 
 - name: gh-pages
   image: letfn/drone-hugo
-  github_pages: yes
+  settings:
+    github_pages: true
 
 ...
