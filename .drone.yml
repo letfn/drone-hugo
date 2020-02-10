@@ -11,6 +11,7 @@ steps:
 - name: everything
   image: letfn/drone-kaniko
   settings:
+    args: --single-snapshot
     cache: true
     password:
       from_secret: docker_password
