@@ -1,6 +1,4 @@
-FROM ubuntu:bionic-20200112 AS download
-
-RUN apt-get update && apt-get install -y curl git
+FROM letfn/container AS download
 
 WORKDIR /tmp
 
@@ -16,7 +14,7 @@ FROM letfn/container
 
 WORKDIR /drone/src
 
-RUN apt-get update && apt-get upgrade -y
+RUN apk update
 
 COPY --from=download /usr/local/bin/hugo /usr/local/bin/hugo
 COPY --from=download /drone/themes /drone/themes
@@ -24,4 +22,4 @@ COPY config.yaml.template /drone/
 
 COPY plugin /plugin
 
-ENTRYPOINT [ "/plugin" ]
+ENTRYPOINT [ "/tini", "--", "/plugin" ]

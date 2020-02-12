@@ -28,3 +28,4 @@ docs: # Build docs
 build: # Build container
 	@echo
 	drone exec --pipeline $@ --secret-file .drone.secret
+	cat benchmark/build.json | jq -r 'to_entries | map(.value = (.value/1000000/1000 | tostring | split(".")[0] | tonumber))[] | "\(.value) \(.key)"' | sort -n | talign 1
