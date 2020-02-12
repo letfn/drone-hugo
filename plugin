@@ -14,9 +14,9 @@ function main {
       echo uglyurls: false
       echo publishDir: gh-pages
     fi
-  ) > /drone/config.yaml
+  ) > /tmp/config.yaml
   
-  exec hugo --config /drone/config.yaml
+  exec hugo --config /tmp/config.yaml
 }
 
 main "$@"
