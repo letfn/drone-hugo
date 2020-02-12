@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 function main {
-  set -exfu
-
   (
     cat /drone/config.yaml.template
     echo
@@ -15,6 +13,8 @@ function main {
       echo publishDir: gh-pages
     fi
   ) > /tmp/config.yaml
+
+  id
   
   exec hugo --config /tmp/config.yaml
 }
