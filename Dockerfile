@@ -1,6 +1,6 @@
 FROM letfn/container AS download
 
-WORKDIR /tmp
+USER root
 
 RUN curl -sSL -O https://github.com/gohugoio/hugo/releases/download/v0.64.0/hugo_0.64.0_Linux-64bit.tar.gz \
   && tar xvfz hugo_0.64.0_Linux-64bit.tar.gz hugo \
@@ -14,6 +14,7 @@ FROM letfn/container
 
 WORKDIR /drone/src
 
+USER root
 RUN apk update
 
 COPY --from=download /usr/local/bin/hugo /usr/local/bin/hugo
@@ -21,5 +22,7 @@ COPY --from=download /drone/themes /drone/themes
 COPY config.yaml.template /drone/
 
 COPY plugin /plugin
+
+USER app
 
 ENTRYPOINT [ "/tini", "--", "/plugin" ]
