@@ -23,6 +23,6 @@ COPY config.yaml.template /drone/
 
 COPY plugin /plugin
 
-USER app
+USER root
 
 ENTRYPOINT [ "/tini", "--", "/plugin" ]
