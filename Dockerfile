@@ -12,17 +12,10 @@ RUN mkdir -p /drone/themes && git clone https://github.com/defn/drone-hugo-theme
 
 FROM letfn/container
 
-WORKDIR /drone/src
-
-USER root
-RUN apk update
-
 COPY --from=download /usr/local/bin/hugo /usr/local/bin/hugo
 COPY --from=download /drone/themes /drone/themes
 COPY config.yaml.template /drone/
 
 COPY plugin /plugin
-
-USER root
 
 ENTRYPOINT [ "/tini", "--", "/plugin" ]

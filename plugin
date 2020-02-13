@@ -15,8 +15,13 @@ function main {
       echo publishDir: gh-pages
     fi
   ) > /tmp/config.yaml
-  
-  exec hugo --config /tmp/config.yaml
+
+  if [[ -w . ]]; then
+    exec hugo --config /tmp/config.yaml
+    return $?
+  fi
+
+  return 0
 }
 
 main "$@"
