@@ -1,6 +1,6 @@
 FROM letfn/container AS download
 
-ARG _HUGO_VERSION=0.64.0
+ARG _HUGO_VERSION=0.64.1
 
 WORKDIR /tmp
 
