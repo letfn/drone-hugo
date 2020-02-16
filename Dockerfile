@@ -1,19 +1,18 @@
 FROM letfn/container AS download
 
-USER root
+WORKDIR /tmp
 
 RUN curl -sSL -O https://github.com/gohugoio/hugo/releases/download/v0.64.0/hugo_0.64.0_Linux-64bit.tar.gz \
   && tar xvfz hugo_0.64.0_Linux-64bit.tar.gz hugo \
   && rm -f hugo_0.64.0_Linux-64bit.tar.gz \
-  && chmod 755 hugo \
-  && mv hugo /usr/local/bin/
+  && chmod 755 hugo
 
-RUN mkdir -p /drone/themes && git clone https://github.com/defn/drone-hugo-theme /drone/themes/drone-hugo-theme
+RUN mkdir themes && git clone https://github.com/defn/drone-hugo-theme themes/drone-hugo-theme
 
 FROM letfn/container
 
-COPY --from=download /usr/local/bin/hugo /usr/local/bin/hugo
-COPY --from=download /drone/themes /drone/themes
+COPY --from=download /tmp/hugo /usr/local/bin/hugo
+COPY --from=download /tmp/themes /drone/themes
 COPY config.yaml.template /drone/
 
 COPY plugin /plugin
