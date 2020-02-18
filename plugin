@@ -12,7 +12,7 @@ function main {
     fi
     if [[ -n "${PLUGIN_GITHUB_PAGES:-}" ]]; then
       echo uglyurls: false
-      echo publishDir: gh-pages
+      echo publishDir: docs
     fi
   ) > /tmp/config.yaml
 
