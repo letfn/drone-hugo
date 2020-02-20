@@ -9,6 +9,8 @@ RUN curl -sSL -O https://github.com/gohugoio/hugo/releases/download/v${_HUGO_VER
   && rm -f hugo_${_HUGO_VERSION}_Linux-64bit.tar.gz \
   && chmod 755 hugo
 
+RUN echo 1
+
 RUN mkdir themes && git clone https://github.com/defn/drone-hugo-theme themes/drone-hugo-theme
 
 FROM letfn/container

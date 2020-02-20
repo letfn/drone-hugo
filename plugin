@@ -17,7 +17,11 @@ function main {
   ) > /tmp/config.yaml
 
   if [[ -w . ]]; then
-    exec hugo --config /tmp/config.yaml
+    if [[ -n "${PLUGIN_WATCH:-}" ]]; then
+      exec hugo serve --bind 0.0.0.0 --disableFastRender --ignoreCache --noHTTPCache --renderToDisk --config /tmp/config.yaml
+    else
+      exec hugo --config /tmp/config.yaml
+    fi
     return $?
   fi
 
