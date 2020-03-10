@@ -13,6 +13,11 @@ steps:
   settings:
     task: fmt
 
+trigger:
+  branch:
+    exclude:
+    - github-pages
+
 ---
 kind: pipeline
 type: docker
@@ -27,6 +32,11 @@ steps:
   image: letfn/drone
   settings:
     task: lint
+
+trigger:
+  branch:
+    exclude:
+    - github-pages
 
 ---
 kind: pipeline
