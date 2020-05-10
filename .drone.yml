@@ -13,11 +13,6 @@ steps:
   settings:
     task: fmt
 
-trigger:
-  branch:
-    exclude:
-    - github-pages
-
 ---
 kind: pipeline
 type: docker
@@ -32,11 +27,6 @@ steps:
   image: letfn/drone
   settings:
     task: lint
-
-trigger:
-  branch:
-    exclude:
-    - github-pages
 
 ---
 kind: pipeline
@@ -57,7 +47,6 @@ steps:
     password:
       from_secret: docker_password
     repo: letfn/drone-hugo
-    skip_tls_verify: true
     tag: latest
     username:
       from_secret: docker_username
@@ -86,5 +75,29 @@ steps:
 
 depends_on:
 - build
+
+---
+kind: secret
+name: docker_username
+
+get:
+  path: kv/data/drone/common
+  name: docker_username
+
+---
+kind: secret
+name: docker_password
+
+get:
+  path: kv/data/drone/common
+  name: docker_password
+
+---
+kind: secret
+name: github_token
+
+get:
+  path: kv/data/drone/common
+  name: github_token
 
 ...
