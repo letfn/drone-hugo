@@ -6,13 +6,14 @@ function main {
   (
     cat /drone/config.yaml.template
     echo
+
+    echo uglyurls: false
+    echo publishDir: docs
+    echo
+
     if [[ -f config.yaml ]]; then
       cat config.yaml
       echo
-    fi
-    if [[ -n "${PLUGIN_GITHUB_PAGES:-}" ]]; then
-      echo uglyurls: false
-      echo publishDir: docs
     fi
   ) > /tmp/config.yaml
 
