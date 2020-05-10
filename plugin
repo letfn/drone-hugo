@@ -18,9 +18,13 @@ function main {
 
   if [[ -w . ]]; then
     if [[ -n "${PLUGIN_WATCH:-}" ]]; then
-      exec hugo server --bind 0.0.0.0 --disableFastRender --ignoreCache --noHTTPCache --renderToDisk --config /tmp/config.yaml
+      exec hugo server \
+        --bind 0.0.0.0  --appendPort false \
+        --disableFastRender --ignoreCache --noHTTPCache --renderToDisk \
+        --config /tmp/config.yaml
     else
-      exec hugo --config /tmp/config.yaml
+      exec hugo \
+        --config /tmp/config.yaml
     fi
     return $?
   fi
