@@ -21,7 +21,7 @@ function main {
     if [[ -n "${PLUGIN_WATCH:-}" ]]; then
       exec hugo server \
         --bind 0.0.0.0  --appendPort false --liveReloadPort 443 \
-        --disableFastRender --ignoreCache --noHTTPCache --renderToDisk \
+        --disableFastRender --ignoreCache --noHTTPCache \
         --config /tmp/config.yaml
     else
       exec hugo \
