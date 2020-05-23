@@ -13,3 +13,6 @@ disableKinds: ["taxonomy", "taxonomyTerm", "RSS", "sitemap", "robotsTXT", "404"]
 disableHugoGeneratorInject: true
 
 uglyurls: true
+
+[markup.goldmark.renderer]
+unsafe= true
